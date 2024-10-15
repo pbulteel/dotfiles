@@ -4,8 +4,6 @@ alias cd..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias ~="cd ~" # `cd` is probably faster to type though
-alias -- -="cd -"
 
 # mv, rm, cp
 alias mv='mv -v'
@@ -26,13 +24,10 @@ function clone() {
 # git root
 alias gr='[ ! -z `git rev-parse --show-cdup` ] && cd `git rev-parse --show-cdup || pwd`'
 
-alias dotfiles="subl ~/code/dotfiles" # open dotfiles for viewing
+alias dotfiles="code ~/Workspace/dotfiles" 
 alias dig="dig +nocmd any +multiline +noall +answer"
 # wget sucks with certificates. Let's keep it simple.
-alias wget="curl -O"
-
-# Recursively delete `.DS_Store` files
-alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
+#alias wget="curl -O"
 
 alias diskspace_report="df -P -kHl"
 alias g="git"
@@ -42,3 +37,25 @@ alias ungz="gunzip -k"
 
 alias fs="stat -f \"%z bytes\""
 alias xpraserver='xpra start --printing=no --systemd-run=no --daemon=no :110'
+
+alias obscam="sudo modprobe v4l2loopback devices=1 video_nr=10 card_label=\"OBS Cam\" exclusive_caps=1 \
+    && sudo modprobe snd-aloop index=10 id=\"OBS Mic\" \
+    && pacmd 'update-source-proplist alsa_input.platform-snd_aloop.0.analog-stereo device.description=\"OBS Mic\" ' \
+    && ffmpeg -probesize 32 -analyzeduration 0 -listen 1 -i rtmp://127.0.0.1:1935/live/test -map 0:1 -f v4l2 -vcodec rawvideo /dev/video10 -map 0:0 -f alsa hw:10,1"
+
+################
+# kubectl aliases.
+alias kgph="kubectl get pods -n home-assistant"
+alias kdph="kubectl -n home-assistant delete pod "
+alias k="kubectl" 
+alias kc='k config view --minify | grep name'
+alias kdp='kubectl describe pod'
+alias kd='kubectl describe pod'
+alias ke='kubectl explain'
+alias kf='kubectl create -f'
+alias kg='kubectl get pods --show-labels'
+alias kr='kubectl replace -f'
+alias ks='kubectl get namespaces'
+alias kga='k get pod --all-namespaces'
+alias kgaa='kubectl get all --show-labels'
+alias keph="kubectl -n home-assistant exec -it "

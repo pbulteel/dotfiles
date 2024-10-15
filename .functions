@@ -1,0 +1,32 @@
+function mmssh { mssh $@ & }
+function rec {  
+  local DATE=$(/usr/bin/date +"%Y%m%d%H%M") 
+  script -t${HOME}//record/$DATE.timing ${HOME}//record/$DATE.session 
+  echo "Session has $DATE"
+}
+function playback { 
+  local DATE=$1
+  if [[ -z $DATE ]]; then echo "You need the date." ; return ; fi
+  scriptreplay -t${HOME}/record/$DATE.timing -s ${HOME}//record/$DATE.session 
+}
+function mtd()
+{
+    local dir
+    dir=$(mktemp -d)
+    if test -n "$dir"
+    then
+        if test -d "$dir"
+        then
+            echo "$dir"
+            cd "$dir"
+        else
+            echo "mktemp directory $dir does not exist"
+        fi
+    else
+        echo "mktemp didn't work"
+    fi
+}
+function mcd()
+{
+    test -d "$1" || command mkdir -p "$1" && cd "$1"
+}

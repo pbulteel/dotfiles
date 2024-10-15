@@ -116,9 +116,6 @@ fi
 
 [ -n "$PS1" ] && source ~/.bash_profile
 
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 export PATH=$PATH:/usr/local/go/bin
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 

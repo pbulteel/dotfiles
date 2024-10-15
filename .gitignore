@@ -1,8 +1,10 @@
 # System files
 .DS_Store
 Thumbs.db
+Desktop.ini
 
 .bash_history
 .swp
 .bak
 .backup
+.extras
