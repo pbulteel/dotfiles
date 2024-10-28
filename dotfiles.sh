@@ -1,21 +1,24 @@
 #!/usr/bin/env bash
 # 
 # Author: Patrick Bulteel
-# Description: This script copies all the .bash* and relevant files over.
+# Description:  This script copies all the .bash* and relevant files over.
+#               To simplify the copy, I've put the filenames in a bash brace
+#               expansion list. Unfortunately, due to the order of expansions,
+#               brace expansion happens before variable expansion, so I can't 
+#               make the list a variable. 
 #
 
 ARG=$1
-FILELIST=".bashrc,.aliases,.bash_profile,.bash_prompt,.bash-preexec.sh,.extra,.functions"
 
 case $ARG in
   'restore')
     echo 'Copying files over...'
-    cp ./{${FILELIST}} $HOME/.
+    cp ./{.bashrc,.aliases,.bash_profile,.bash_prompt,.bash-preexec.sh,.extra,.functions} \
+    $HOME/.
     ;;
   'backup')
     echo 'Backing up files into git repo...'
-    cp ${HOME}/.bashrc ${HOME}/.aliases ${HOME}/.bash_profile ${HOME}/.bash_prompt \
-        ${HOME}/.bash-preexec.sh ${HOME}/.extra ${HOME}/.functions \
+    cp ${HOME}/{.bashrc,.aliases,.bash_profile,.bash_prompt,.bash-preexec.sh,.extra,.functions} \
         /.
     ;;
   *)
