@@ -55,7 +55,6 @@ export HISTFILESIZE=$HISTSIZE                   # big big history
 shopt -s histappend                             # append to history, don't overwrite it
 shopt -s cmdhist                                # Save multi-line commands as one command
 
-
 # Enable incremental history search with up/down arrows (also Readline goodness)
 # Learn more about this here: http://codeinthehole.com/writing/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/
 bind '"\e[A": history-search-backward'
@@ -80,28 +79,8 @@ fi;
 ## Completion…
 ##
 
-
 if [[ -n "$ZSH_VERSION" ]]; then  # quit now if in zsh
     return 1 2> /dev/null || exit 1;
-fi;
-
-# Sorry, very MacOS centric here. :/
-if  which brew > /dev/null; then
-
-    # bash completion.
-    if [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-        source "$(brew --prefix)/share/bash-completion/bash_completion";
-    elif [ -f /etc/bash_completion ]; then
-        source /etc/bash_completion;
-    fi
-
-    # homebrew completion
-    source "$(brew --prefix)/etc/bash_completion.d/brew"
-
-    # hub completion
-    if  which hub > /dev/null; then
-        source "$(brew --prefix)/etc/bash_completion.d/hub.bash_completion.sh";
-    fi;
 fi;
 
 # Enable tab completion for `g` by marking it as an alias for `git`
@@ -115,7 +94,6 @@ fi;
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
-
 
 # Add tab completion for `defaults read|write NSGlobalDomain`
 # You could just use `-g` instead, but I like being explicit
