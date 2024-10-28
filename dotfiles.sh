@@ -14,18 +14,18 @@ case "${COMMAND}" in
   'restore')
     echo 'Copying files over...'
     cp ./{.bashrc,.aliases,.bash_profile,.bash_prompt,.bash-preexec.sh,.extra,.functions} \
-    $HOME/.
+    "${HOME}"/.
     ;;
   'backup')
     echo 'Backing up files into git repo...'
-    cp ${HOME}/{.bashrc,.aliases,.bash_profile,.bash_prompt,.bash-preexec.sh,.extra,.functions} \
+    cp "${HOME}"/{.bashrc,.aliases,.bash_profile,.bash_prompt,.bash-preexec.sh,.extra,.functions} \
         /.
     ;;
   *)
-    echo '$0: invalid option -- "${ARG}"'
-    echo 'Usage: $0 <command>'
-    echo '  backup         Copies the files from $HOME to your git repo'
-    echo '  restore        Copies the files from your git repo into $HOME'
-    echo ''
+    echo "$0: invalid option -- ${COMMAND}"
+    echo "Usage: $0 <command>"
+    echo "  backup         Copies the files from \$HOME to your git repo"
+    echo "  restore        Copies the files from your git repo into \$HOME"
+    echo ""
     ;;
 esac
