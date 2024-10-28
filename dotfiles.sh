@@ -8,9 +8,9 @@
 #               make the list a variable. 
 #
 
-ARG=$1
+COMMAND=$1
 
-case $ARG in
+case "${COMMAND}" in
   'restore')
     echo 'Copying files over...'
     cp ./{.bashrc,.aliases,.bash_profile,.bash_prompt,.bash-preexec.sh,.extra,.functions} \
