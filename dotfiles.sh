@@ -34,12 +34,12 @@ BCyan='\033[1;36m'   # Cyan
 
 case "${COMMAND}" in
   'restore')
-    echo -e '${BRED}Copying files over...${NC}'
+    echo -e "${BRED}Copying files over...${NC}"
     echo cp ./{.bashrc,.aliases,.bash_profile,.bash_prompt,.bash-preexec.sh,.extra,.functions} \
     "${HOME}"/.
     ;;
   'backup')
-    echo -e 'Backing up files into git repo...'
+    echo -e "${BPURPLE}Backing up files into git repo...${NC}"
     echo cp "${HOME}"/{.bashrc,.aliases,.bash_profile,.bash_prompt,.bash-preexec.sh,.extra,.functions} \
         /.
     ;;
