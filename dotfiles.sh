@@ -30,7 +30,7 @@ NC='\033[0m' # No Color
 BRED='\033[1;31m'    # Red
 BPURPLE='\033[1;35m' # Purple
 BYELLOW='\033[1;33m' # Yellow
-BCyan='\033[1;36m'   # Cyan
+BCYAN='\033[1;36m'   # Cyan
 
 case "${COMMAND}" in
   'restore')
@@ -39,7 +39,7 @@ case "${COMMAND}" in
     "${HOME}"/.
     ;;
   'backup')
-    echo -e "${BPURPLE}Backing up files into git repo...${NC}"
+    echo -e "${BPURPLE}Backing up files into ${BCYAN}git repo...${NC}"
     echo cp "${HOME}"/{.bashrc,.aliases,.bash_profile,.bash_prompt,.bash-preexec.sh,.extra,.functions} \
         /.
     ;;
