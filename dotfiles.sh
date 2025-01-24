@@ -13,6 +13,14 @@ COMMAND=$1
 set -euo pipefail
 IFS=$'\n\t'
 
+### COLOR ### (https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux)
+NC='\033[0m' # No Color
+# Bold
+BRED='\033[1;31m'    # Red
+BPURPLE='\033[1;35m' # Purple
+BYELLOW='\033[1;33m' # Yellow
+BCYAN='\033[1;36m'   # Cyan
+
 cat << 'EOF'
       .--.
      |o_o |  HI :)
@@ -23,24 +31,22 @@ cat << 'EOF'
   \___)=(___/
 EOF
 
-
-### COLOR ### (https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux)
-NC='\033[0m' # No Color
-# Bold
-BRED='\033[1;31m'    # Red
-BPURPLE='\033[1;35m' # Purple
-BYELLOW='\033[1;33m' # Yellow
-BCYAN='\033[1;36m'   # Cyan
+if [[ ! -f .bashrc ]] ; then echo -e "${BRED}Please run it in the dotfiles git directory." ; fi
 
 case "${COMMAND}" in
   'restore')
     echo -e "${BRED}Copying files over...${NC}"
-    echo cp ./{.bashrc,.aliases,.bash_profile,.bash_prompt,.bash-preexec.sh,.extra,.functions} \
+    cp ./{.bashrc,.aliases,.bash_profile,.bash_prompt,.bash-preexec.sh,.functions,.vimrc} \
     "${HOME}"/.
+    touch "${HOME}/.extra"
+    # git cli completion needs this.
+    echo -e "${BRED}Downloading git-completion...${NC}"
+    curl -sS -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash > ~/.git-completion.bash
+
     ;;
   'backup')
     echo -e "${BPURPLE}Backing up files into ${BCYAN}git repo...${NC}"
-    echo cp "${HOME}"/{.bashrc,.aliases,.bash_profile,.bash_prompt,.bash-preexec.sh,.extra,.functions} \
+    cp "${HOME}"/{.bashrc,.aliases,.bash_profile,.bash_prompt,.bash-preexec.sh,.functions,.vimrc} \
         /.
     ;;
   *)
